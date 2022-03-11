@@ -24,7 +24,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Media</h6>
                     </div>
                     <div class="card-body border">
-                        <vue-dropzone ref="myVueDropzone" id="dropzone"  :options="dropzoneOptions" @vdropzone-complete="afterImageUpComplete"  @vdropzone-sending="saveProductData"></vue-dropzone>
+                        <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" @vdropzone-complete="afterImageUpComplete"  @vdropzone-sending="saveProductData"></vue-dropzone>
                     </div>
                 </div>
             </div>
@@ -111,6 +111,10 @@ export default {
         variants: {
             type: Array,
             required: true
+        },
+        producttoedit: {
+            type: Array,
+            required: true
         }
     },
     data() {
@@ -131,7 +135,7 @@ export default {
                 thumbnailWidth: 150,
                 maxFilesize: 0.5,
                 autoProcessQueue: false,
-                headers:{ 'X-CSRF-TOKEN': token },
+                headers:{ 'X-CSRF-TOKEN': token }
             }
         }
     },
@@ -179,13 +183,8 @@ export default {
             return ans;
         },
         // after image up complete
-        afterImageUpComplete: async function(response){
-            console.log(response);
-            if(response.status==='success'){
-                alert("Product Uploaded");
-            }else{
-                alert("Product Not Uploaded");
-            }
+        afterImageUpComplete: async function(){
+            console.log("up complete");
         },
         addProductToDb: async function () {
             this.$refs.myVueDropzone.processQueue();

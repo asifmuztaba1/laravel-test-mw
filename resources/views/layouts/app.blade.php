@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 {{--<body id="page-top">--}}
@@ -102,6 +103,16 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
+            @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
+                    @if(session()->has('error'))
+                        <div class="alert alert-error">
+                            {{ session()->get('error') }}
+                        </div>
+                    @endif
                 @yield('content')
 
             </div>
@@ -155,6 +166,12 @@
 </div>
 
 <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
+<script>
+    $(document).ready(function() {
+        $('#filterVariant').select2();
+    });
+</script>
 </body>
 </html>
